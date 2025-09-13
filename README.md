@@ -1,2 +1,2 @@
-# nkarbofos.github.io
+# Web-frontend-ITMO
 Здесь будут все мои лабораторные по фронтенду
