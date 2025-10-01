@@ -1,0 +1,322 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+figure,
+p,
+ol,
+ul {
+    margin: 0;
+}
+
+ol[role="list"],
+ul[role="list"] {
+    list-style: none;
+    padding-inline: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+body {
+    font: Roboto;
+    letter-spacing: 0px;
+}
+
+img {
+    display: block;
+    max-inline-size: 100%;
+}
+
+.promo {
+    height: 100vh;
+    background: url("../img/Main\ bg.jpg") no-repeat center/cover;
+    padding: 22px;
+    text-align: center;
+}
+
+.promo_logo img {
+    width: 72px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.promo_logo-text {
+    color: white;
+    padding-top: 15px;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.promo_title {
+    margin-top: 52px;
+}
+
+.promo_title,
+.promo_subtitle {
+    color: #f9bf3b;
+    text-transform: uppercase;
+    font-size: 41px;
+}
+
+.promo_simple {
+    color: white;
+    text-transform: uppercase;
+    font-size: 80px;
+    font-weight: 900;
+}
+
+.promo_desc {
+    width: 75%;
+    color: white;
+    margin: 20px auto 30px;
+    font-size: 21px;
+    font-weight: 500;
+}
+
+.promo_desc-highlight {
+    color: #f9bf3b;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.signup_button {
+    width: 310px;
+    height: 71px;
+    background: linear-gradient(#feb05d, #ff4d00);
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 21px;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-shadow: -1px -1px rgb(0, 0, 0, 0.2);
+}
+
+.promo_more {
+    font-size: 20px;
+    color: white;
+    margin-top: 50px;
+}
+
+.promo_more img {
+    margin: 15px auto 0;
+}
+
+.about {
+    height: 80vh;
+    padding-top: 70px;
+    text-align: center;
+}
+
+.about hr {
+    border: none;
+    width: 220px;
+    height: 7px;
+    background-color: #f9bf3b;
+}
+
+.about_title {
+    margin-bottom: 20px;
+    font-weight: 500;
+    font-size: 30px;
+    text-transform: uppercase;
+}
+
+.about_subtitle {
+    margin-top: 15px;
+    color: #4a4a4a;
+    font-weight: 500;
+    font-size: 23px;
+}
+
+.about_container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 85%;
+    margin: 50px auto 0;
+}
+
+.about_item {
+    width: 370px;
+}
+
+.about_item img {
+    width: 342px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.about_item-text {
+    margin-top: 15px;
+    color: #4a4a4a;
+    font-weight: 300;
+    font-size: 16px;
+}
+
+.faq {
+    height: 90vh;
+    background: black url("../img/Online\ radio.jpg") no-repeat left 40px bottom
+        40px / 615px auto;
+    padding-top: 70px;
+    padding-right: 200px;
+    text-align: right;
+}
+
+.faq_title {
+    margin-top: 50px;
+    color: #f9bf3b;
+    font-weight: 900;
+    font-size: 30px;
+    text-transform: uppercase;
+}
+
+.faq_desc {
+    margin-top: 40px;
+    float: right;
+    width: 60%;
+    color: white;
+    font-weight: 300;
+    font-size: 16px;
+}
+
+.faq_desc p {
+    margin-bottom: 30px;
+}
+
+.faq_desc b {
+    font-weight: 500;
+}
+
+.skills {
+    height: 60vh;
+    background: url("../img/Bg.jpg") no-repeat center/cover;
+    padding-top: 80px;
+    text-align: center;
+}
+
+.skills hr {
+    border: none;
+    width: 220px;
+    height: 7px;
+    background-color: #f9bf3b;
+}
+
+.skills_title {
+    margin-bottom: 20px;
+    color: white;
+    font-weight: 400;
+    font-size: 30px;
+    text-transform: uppercase;
+}
+
+.skills_container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 75%;
+    margin: 50px auto 0;
+}
+
+.skills_item {
+    width: 200px;
+}
+
+.skills_item-logo {
+    margin: 0 auto;
+    background-color: #f9bf3b;
+    width: 115px;
+    height: 115px;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.skills_item-logo img {
+    width: 60px;
+    height: auto;
+}
+
+.skills_item-text {
+    margin-top: 15px;
+    color: white;
+    font-weight: 300;
+    font-size: 16px;
+}
+
+.gifts {
+    height: 80vh;
+    padding-top: 80px;
+    text-align: center;
+}
+
+.gifts img {
+    width: 155px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.gifts_desc {
+    width: 80%;
+    margin: 70px auto;
+    font-weight: 500;
+    font-size: 30px;
+}
+
+.webinar {
+    height: 70vh;
+    padding-top: 40px;
+    text-align: center;
+    background: black;
+}
+
+.webinar img {
+    width: 500px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.webinar h2,
+p {
+    margin-bottom: 20px;
+}
+
+.webinar_title {
+    margin-top: 30px;
+    font-size: 30px;
+    font-weight: 500;
+    color: white;
+    text-transform: uppercase;
+}
+
+.webinar_date {
+    font-size: 36px;
+    font-weight: 900;
+    color: #f9bf3b;
+    text-transform: uppercase;
+}
+
+.webinar_desc {
+    font-size: 23px;
+    font-weight: 500;
+    color: white;
+}
+
+.contacts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    height: 20vh;
+    background: #1a1a1a;
+    color: #888888;
+}
