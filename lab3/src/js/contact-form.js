@@ -14,7 +14,7 @@ class ContactForm extends HTMLElement {
       <section class="form">
         <h2 class="title-h2-bold form__title">Get in touch</h2>
         <div class="form__view">
-          <img src="/src/img/form/tea.jpg" alt="tea" class="img-shadow form__view__img" />
+          <img src="src/img/form/tea.jpg" alt="tea" class="img-shadow form__view__img" />
           <div class="form__view__fields">
             <div class="form__view__fields__name">
               <label for="name">Name</label>
@@ -34,7 +34,7 @@ class ContactForm extends HTMLElement {
             </div>
             <button class="btn-default form__view__fields__btn">send request</button>
             <div class="form__view__fields__vase">
-              <img src="/src/img/form/vase.png" alt="vase" />
+              <img src="src/img/form/vase.png" alt="vase" />
             </div>
           </div>
         </div>
