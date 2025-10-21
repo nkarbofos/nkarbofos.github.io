@@ -1,0 +1,120 @@
+.form {
+    margin: 100px 20px 0;
+    /*height: 360px;*/
+
+    &__title {
+        width: 100%;
+        text-align: center;
+        font-size: 40px;
+        margin-bottom: 40px;
+    }
+
+    &__view {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 3%;
+
+        &__img {
+            width: 573px;
+            height: auto;
+
+            @media screen and (max-width: 1050px) {
+                display: none;
+            }
+        }
+
+        &__fields {
+            width: 100%;
+            height: auto;
+            display: grid;
+            grid-template-rows: fit-content(100%) 160px 1fr fit-content(100%);
+            grid-template-columns: repeat(2, 300px);
+            row-gap: 10px;
+            column-gap: 10px;
+            justify-content: stretch;
+
+            &__name {
+                grid-area: 1 / 1;
+            }
+
+            &__email {
+                grid-area: 1 / 2;
+            }
+
+            &__question {
+                grid-area: 2 / 1;
+                textarea {
+                    height: auto;
+                }
+            }
+
+            &__agree {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-size: 14px;
+                grid-area: 3 / 1;
+
+                input {
+                    width: 14px;
+                    height: auto;
+                }
+                label {
+                    display: inline-block;
+                }
+
+                &.invalid {
+                    input {
+                        outline: 2px solid #FF3B3B; // or use border if you prefer
+                        outline-offset: 2px;
+                    }
+                }
+            }
+
+            &__btn{
+                grid-area: 4 / 1;
+                margin: 0;
+                margin-top: auto;
+                width: 80%;
+            }
+
+            &__vase{
+                grid-area: 5 / 2;
+                img {
+                    margin-top: auto;
+                    margin-left: auto;
+                    margin-right: 20px;
+                    height: 85px;
+                    width: 85px;
+
+                    @media screen and (max-width: 400px) {
+                        display: none;
+                    }
+                }
+            }
+
+            @media screen and (max-width: 1600px) {
+                grid-template-rows: fit-content(100%) fit-content(100%) 160px 1fr fit-content(100%);
+                grid-template-columns: 300px;
+
+                &__name {
+                    grid-area: 1 / 1;
+                }
+                &__email {
+                    grid-area: 2 / 1;
+                }
+                &__question {
+                    grid-area: 3 / 1;
+                }
+                &__agree {
+                    grid-area: 4 / 1;
+                }
+                &__btn{
+                    grid-area: 5 / 1;
+                }
+            }
+        }
+    }
+}

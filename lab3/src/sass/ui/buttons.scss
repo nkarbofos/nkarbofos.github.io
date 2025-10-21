@@ -1,0 +1,23 @@
+@use "../base/variables.scss" as *;
+@use "../base/mixins.scss" as *;
+
+.btn-default {
+	@include button;
+	height: 50px;
+	font-size: 20px;
+
+	// HOVERED state — dark background, white text
+	&:hover {
+		background-color: $dark; // or #1A1A1A if you don't have $dark
+		color: #FFFFFF;
+		border-color: $dark;
+	}
+
+	// ACTIVE state — light gray background, dark text
+	&:active {
+		background-color: #F5F5F5; // or whatever “light” is in your design
+		color: $dark;
+		border-color: $dark;
+		box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+	}
+}

@@ -1,0 +1,56 @@
+@use "../base/mixins.scss" as *;
+
+.title-menu {
+	@include title;
+	font-size: 20px;
+
+	a {
+		display: inline-block;
+		text-decoration: none;      // Убираем подчеркивание
+		color: inherit;             // Наследуем цвет текста (как у div)
+		font-family: inherit;       // Наследуем шрифт
+		font-size: inherit;         // Наследуем размер
+		font-weight: inherit;       // Наследуем жирность
+		line-height: inherit;       // Наследуем высоту строки
+		padding: 0;                 // Убираем лишние отступы
+		margin: 0;                  // Убираем лишние отступы
+		cursor: pointer;            // Показываем, что это кликабельно
+
+		&:hover {
+			text-decoration: none;    // Не появляется подчеркивание при наведении
+			color: inherit;           // Цвет не меняется
+			opacity: 0.8;
+		}
+
+		&:focus {
+			outline: none;            // Убираем фокусную рамку (если нужно)
+		}
+	}
+}
+
+.title-h1-italic {
+	@include title;
+	font-size: 24px;
+	font-style: italic;
+}
+
+.title-h2-bold {
+	@include title;
+	font-size: 24px;
+	font-weight: 500;
+}
+
+.title-h3-title {
+	@include title;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 500;
+}
+
+.title-h1-title {
+	@include title;
+	font-size: 30px;
+	font-style: normal;
+	font-weight: 500;
+	margin-top: 120px;
+}
