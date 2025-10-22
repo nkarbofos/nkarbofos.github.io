@@ -232,442 +232,13 @@ body {
   padding: 0 10px 0 0;
 }
 
-/*@use "../base/variables.scss" as *;
-
-// Общий header — базовые свойства
-.header {
-	position: relative;
-	width: 100%;
-	padding: 20px 0;
-
-	// Десктопная версия (по умолчанию)
-	@media screen and (min-width: 401px) {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-
-		&__logo {
-			position: absolute;
-			left: 50%;
-			transform: translateX(-50%);
-			width: 100px;
-			height: 100px;
-			z-index: 2;
-		}
-
-		&__nav {
-			position: absolute;
-			top: 100%;
-			left: 50%;
-			transform: translateX(-53%);
-			white-space: nowrap;
-			margin-top: 40px;
-
-			&-list {
-				display: flex;
-				gap: 30px;
-				list-style: none;
-				padding: 0;
-				margin: 0;
-			}
-
-			&-link {
-				text-decoration: none;
-				color: $dark;
-				font-family: inherit;
-				font-size: 15px;
-				font-weight: 300;
-				text-transform: uppercase;
-				transition: color 0.3s ease;
-
-				&:hover {
-					color: #000;
-				}
-			}
-		}
-
-		&__icons {
-			margin-left: auto; // прижимаем к правому краю
-			display: flex;
-			align-items: center;
-			gap: 15px;
-
-			a {
-				display: block;
-				color: $dark;
-				span {
-					display: block;
-					width: 20px;
-					height: 20px;
-				}
-			}
-		}
-
-		// Скрыть бургер на десктопе
-		.burger {
-			display: none;
-		}
-	}
-
-	// Мобильная версия
-	@media screen and (max-width: 400px) {
-		position: static;
-		margin: 50px auto 0 auto;
-		padding: 0;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-
-		&__logo {
-			width: 100px;
-			height: 100px;
-			margin-bottom: 30px;
-		}
-
-		&__menu {
-			display: none; // скрыто — используется бургер
-		}
-
-		&__icons {
-			position: absolute;
-			top: 20px;
-			right: 20px;
-			margin: 0;
-			transform: none;
-			align-items: flex-start;
-			gap: 15px;
-
-			a {
-				display: block;
-				color: $dark;
-				span {
-					display: block;
-					width: 20px;
-					height: 20px;
-				}
-			}
-		}
-	}
-}
-
-// === Бургер-меню (общий для мобильных) ===
-.burger {
-	position: absolute;
-	left: 20px;
-	top: 20px;
-	display: flex;
-	height: 23px;
-	flex-direction: column;
-	row-gap: 10px;
-	padding-right: 35px;
-	cursor: pointer;
-
-	span {
-		display: block;
-		width: 20px;
-		height: 1px;
-		background-color: $dark;
-		transition: all 0.3s ease;
-	}
-
-	// Скрыть на десктопе — уже учтено выше, но можно оставить для явности
-	@media screen and (min-width: 401px) {
-		display: none;
-	}
-}
-
-// === Оверлей и сайдбар (не зависит от header) ===
-.menu-overlay {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.5);
-	z-index: 999;
-	opacity: 0;
-	visibility: hidden;
-	transition: opacity 0.3s ease, visibility 0.3s ease;
-
-	&.active {
-		opacity: 1;
-		visibility: visible;
-	}
-}
-
-.menu-sidebar {
-	position: fixed;
-	top: 0;
-	left: -300px;
-	width: 300px;
-	height: 100%;
-	background-color: #fff;
-	z-index: 1000;
-	transition: left 0.3s ease;
-	padding: 40px 20px;
-
-	&.active {
-		left: 0;
-	}
-}
-
-.menu-close {
-	position: absolute;
-	top: 20px;
-	right: 20px;
-	font-size: 30px;
-	background: none;
-	border: none;
-	cursor: pointer;
-	color: $dark;
-	line-height: 1;
-}
-
-.menu-sidebar nav ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-
-	li {
-		margin-bottom: 20px;
-
-		a {
-			text-decoration: none;
-			color: $dark;
-			font-size: 18px;
-			font-weight: bold;
-			text-transform: uppercase;
-			transition: color 0.2s ease;
-
-			&:hover {
-				color: #999;
-			}
-		}
-	}
-}
-
-@use "../base/variables.scss" as *;
-
-// Общий header — базовые свойства
-.header {
-	position: relative;
-	width: 100%;
-	padding: 20px 0;
-
-	// Десктопная версия (по умолчанию)
-	@media screen and (min-width: 401px) {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-
-		&__logo {
-			position: absolute;
-			left: 50%;
-			transform: translateX(-50%);
-			width: 100px;
-			height: 100px;
-			z-index: 2;
-		}
-
-		&__nav {
-			position: absolute;
-			top: 100%;
-			left: 50%;
-			transform: translateX(-53%);
-			white-space: nowrap;
-			margin-top: 40px;
-
-			&-list {
-				display: flex;
-				gap: 30px;
-				list-style: none;
-				padding: 0;
-				margin: 0;
-			}
-
-			&-link {
-				text-decoration: none;
-				color: $dark;
-				font-family: inherit;
-				font-size: 15px;
-				font-weight: 300;
-				text-transform: uppercase;
-				transition: color 0.3s ease;
-
-				&:hover {
-					color: #000;
-				}
-			}
-		}
-
-		&__icons {
-			margin-left: auto; // прижимаем к правому краю
-			display: flex;
-			align-items: center;
-			gap: 15px;
-
-			a {
-				display: block;
-				color: $dark;
-				span {
-					display: block;
-					width: 20px;
-					height: 20px;
-				}
-			}
-		}
-
-		// Скрыть бургер на десктопе
-		.burger {
-			display: none;
-		}
-	}
-
-	// Мобильная версия
-	@media screen and (max-width: 400px) {
-		position: static;
-		margin: 50px auto 0 auto;
-		padding: 0;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-
-		&__logo {
-			width: 100px;
-			height: 100px;
-			margin-bottom: 30px;
-		}
-
-		&__menu {
-			display: none; // скрыто — используется бургер
-		}
-
-		&__icons {
-			position: absolute;
-			top: 20px;
-			right: 20px;
-			margin: 0;
-			transform: none;
-			align-items: flex-start;
-			gap: 15px;
-
-			a {
-				display: block;
-				color: $dark;
-				span {
-					display: block;
-					width: 20px;
-					height: 20px;
-				}
-			}
-		}
-	}
-}
-
-// === Бургер-меню (общий для мобильных) ===
-.burger {
-	position: absolute;
-	left: 20px;
-	top: 20px;
-	display: flex;
-	height: 23px;
-	flex-direction: column;
-	row-gap: 10px;
-	padding-right: 35px;
-	cursor: pointer;
-
-	span {
-		display: block;
-		width: 20px;
-		height: 1px;
-		background-color: $dark;
-		transition: all 0.3s ease;
-	}
-
-	// Скрыть на десктопе — уже учтено выше, но можно оставить для явности
-	@media screen and (min-width: 401px) {
-		display: none;
-	}
-}
-
-// === Оверлей и сайдбар (не зависит от header) ===
-.menu-overlay {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.5);
-	z-index: 999;
-	opacity: 0;
-	visibility: hidden;
-	transition: opacity 0.3s ease, visibility 0.3s ease;
-
-	&.active {
-		opacity: 1;
-		visibility: visible;
-	}
-}
-
-.menu-sidebar {
-	position: fixed;
-	top: 0;
-	left: -300px;
-	width: 300px;
-	height: 100%;
-	background-color: #fff;
-	z-index: 1000;
-	transition: left 0.3s ease;
-	padding: 40px 20px;
-
-	&.active {
-		left: 0;
-	}
-}
-
-.menu-close {
-	position: absolute;
-	top: 20px;
-	right: 20px;
-	font-size: 30px;
-	background: none;
-	border: none;
-	cursor: pointer;
-	color: $dark;
-	line-height: 1;
-}
-
-.menu-sidebar nav ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-
-	li {
-		margin-bottom: 20px;
-
-		a {
-			text-decoration: none;
-			color: $dark;
-			font-size: 18px;
-			font-weight: bold;
-			text-transform: uppercase;
-			transition: color 0.2s ease;
-
-			&:hover {
-				color: #999;
-			}
-		}
-	}
-}*/
 .header {
   position: static;
   margin: 50px auto 0 auto;
   width: 100%;
-  /*padding-top: 50px;*/
   display: flex;
   flex-direction: column;
   align-items: center;
-  /*justify-content: space-between;*/
 }
 .header__logo {
   width: 100px;
@@ -820,15 +391,11 @@ body {
   grid-area: 1/2;
 }
 .promo__title {
-  /*margin-block-start: 50px;
-  padding-inline: 5px;*/
   grid-area: 2/2;
-  /*margin: 0 20px 0 0;*/
   margin: auto 10px 0 auto;
   text-align: right;
 }
 .promo__vase {
-  /*margin: 40px auto 0 auto;*/
   grid-area: 2/3;
   height: 460px;
   width: auto;
@@ -842,8 +409,6 @@ body {
   }
 }
 .promo__btn {
-  /*width: 100%;
-  margin: 18px auto 0 auto;*/
   grid-area: 3/3;
   margin: 0;
   margin-top: auto;
@@ -869,22 +434,16 @@ body {
     grid-area: 1/3;
   }
   .promo__vase {
-    /*margin: 40px auto 0 auto;*/
     height: 460px;
     width: auto;
     grid-area: 2/2;
   }
   .promo__title {
-    /*margin-block-start: 50px;
-    padding-inline: 5px;*/
     grid-area: 2/1;
-    /*margin: 0 20px 0 0;*/
     margin: auto 10px 0 auto;
     text-align: left;
   }
   .promo__btn {
-    /*width: 100%;
-    margin: 18px auto 0 auto;*/
     grid-area: 3/2;
     margin: 0;
     margin-top: auto;
@@ -974,7 +533,6 @@ body {
 
 .form {
   margin: 100px 20px 0;
-  /*height: 360px;*/
 }
 .form__title {
   width: 100%;
@@ -1091,38 +649,26 @@ body {
   font-size: 40px;
   margin-bottom: 60px;
 }
-.works {
-  /* Optional: Center the slider horizontally */
-}
 .works .swiper {
   width: 100%;
   margin: 0 auto;
-}
-.works {
-  /* Make slides take up equal space and center them */
 }
 .works .swiper-slide {
   width: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: auto; /* Let Swiper calculate based on slidesPerView */
+  width: auto;
   height: auto;
   padding: 10px;
   box-sizing: border-box;
 }
-.works {
-  /* Style for images inside slides */
-}
 .works .swiper-slide img {
   max-width: 100%;
-  max-height: 300px; /* Adjust as needed */
+  max-height: 300px;
   object-fit: cover;
-  border-radius: 8px; /* Optional: rounded corners */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
-}
-.works {
-  /* Customize pagination dots */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 .works .swiper-pagination-bullet {
   width: 8px;
@@ -1132,18 +678,12 @@ body {
   transition: all 0.3s ease;
 }
 .works .swiper-pagination-bullet-active {
-  background-color: #999; /* Match your design */
+  background-color: #999;
   opacity: 1;
   transform: scale(1.2);
 }
-.works {
-  /* Position pagination below the slider */
-}
 .works .swiper-pagination {
   margin-top: 30px;
-}
-.works {
-  /* Optional: Style navigation buttons */
 }
 .works .swiper-button-prev,
 .works .swiper-button-next {

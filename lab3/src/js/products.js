@@ -1,7 +1,5 @@
-// переменную на наш сервер API
 const API_BASE = "https://ceramic-api.onrender.com";
 
-// формирование html для продукта
 function productToHTML(p) {
   return `
     <article class="catalog__item">
@@ -13,7 +11,6 @@ function productToHTML(p) {
     </article>`;
 }
 
-// запрос данных с API
 async function fetchProducts() {
   const res = await fetch(`${API_BASE}/api/products`);
   if (!res.ok) {

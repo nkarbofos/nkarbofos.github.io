@@ -1,6 +1,5 @@
 .form {
     margin: 100px 20px 0;
-    /*height: 360px;*/
 
     &__title {
         width: 100%;
@@ -67,7 +66,7 @@
 
                 &.invalid {
                     input {
-                        outline: 2px solid #FF3B3B; // or use border if you prefer
+                        outline: 2px solid #FF3B3B;
                         outline-offset: 2px;
                     }
                 }

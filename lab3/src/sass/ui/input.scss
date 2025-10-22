@@ -19,8 +19,8 @@ input, textarea {
 
 input.invalid,
 textarea.invalid {
-	border: 1px solid #FF3B3B; // bright red for error
-	box-shadow: 0 0 0 2px rgba(255, 59, 59, 0.1); // optional glow
+	border: 1px solid #FF3B3B;
+	box-shadow: 0 0 0 2px rgba(255, 59, 59, 0.1);
 }
 
 textarea {

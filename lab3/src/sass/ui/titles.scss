@@ -6,24 +6,24 @@
 
 	a {
 		display: inline-block;
-		text-decoration: none;      // Убираем подчеркивание
-		color: inherit;             // Наследуем цвет текста (как у div)
-		font-family: inherit;       // Наследуем шрифт
-		font-size: inherit;         // Наследуем размер
-		font-weight: inherit;       // Наследуем жирность
-		line-height: inherit;       // Наследуем высоту строки
-		padding: 0;                 // Убираем лишние отступы
-		margin: 0;                  // Убираем лишние отступы
-		cursor: pointer;            // Показываем, что это кликабельно
+		text-decoration: none;
+		color: inherit;
+		font-family: inherit;
+		font-size: inherit;
+		font-weight: inherit;
+		line-height: inherit;
+		padding: 0;
+		margin: 0;
+		cursor: pointer;
 
 		&:hover {
-			text-decoration: none;    // Не появляется подчеркивание при наведении
-			color: inherit;           // Цвет не меняется
+			text-decoration: none;
+			color: inherit;
 			opacity: 0.8;
 		}
 
 		&:focus {
-			outline: none;            // Убираем фокусную рамку (если нужно)
+			outline: none;
 		}
 	}
 }

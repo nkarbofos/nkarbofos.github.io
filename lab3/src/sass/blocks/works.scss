@@ -8,34 +8,30 @@
         margin-bottom: 60px;
     }
 
-    /* Optional: Center the slider horizontally */
     .swiper {
         width: 100%;
         margin: 0 auto;
     }
 
-    /* Make slides take up equal space and center them */
     .swiper-slide {
         width: 80%;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: auto; /* Let Swiper calculate based on slidesPerView */
+        width: auto;
         height: auto;
         padding: 10px;
         box-sizing: border-box;
     }
 
-    /* Style for images inside slides */
     .swiper-slide img {
         max-width: 100%;
-        max-height: 300px; /* Adjust as needed */
+        max-height: 300px;
         object-fit: cover;
-        border-radius: 8px; /* Optional: rounded corners */
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Optional: subtle shadow */
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    /* Customize pagination dots */
     .swiper-pagination-bullet {
         width: 8px;
         height: 8px;
@@ -45,17 +41,15 @@
     }
 
     .swiper-pagination-bullet-active {
-    background-color: #999; /* Match your design */
+    background-color: #999;
         opacity: 1;
         transform: scale(1.2);
     }
 
-    /* Position pagination below the slider */
     .swiper-pagination {
         margin-top: 30px;
     }
 
-    /* Optional: Style navigation buttons */
     .swiper-button-prev,
     .swiper-button-next {
         color: #333;

@@ -1,7 +1,4 @@
-// footer.js
-
 (function () {
-  // Функция для генерации HTML футера
   function createFooterHTML() {
     return `
       <link rel="stylesheet" href="./src/sass/style.css">
@@ -62,14 +59,12 @@
     `;
   }
 
-  // Функция для вставки футера в конец body
   function injectFooter() {
     const footer = document.createElement('div');
     footer.innerHTML = createFooterHTML().trim();
     document.body.appendChild(footer.firstElementChild);
   }
 
-  // Запускаем вставку после загрузки DOM
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', injectFooter);
   } else {

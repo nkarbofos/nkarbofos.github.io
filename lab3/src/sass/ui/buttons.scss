@@ -6,16 +6,14 @@
 	height: 50px;
 	font-size: 20px;
 
-	// HOVERED state — dark background, white text
 	&:hover {
-		background-color: $dark; // or #1A1A1A if you don't have $dark
+		background-color: $dark; 
 		color: #FFFFFF;
 		border-color: $dark;
 	}
 
-	// ACTIVE state — light gray background, dark text
 	&:active {
-		background-color: #F5F5F5; // or whatever “light” is in your design
+		background-color: #F5F5F5; 
 		color: $dark;
 		border-color: $dark;
 		box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);

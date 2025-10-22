@@ -1,13 +1,9 @@
-// contact-form.js
-
 class ContactForm extends HTMLElement {
   constructor() {
     super();
 
-    // Create a shadow DOM for encapsulation (optional but recommended)
     const shadow = this.attachShadow({ mode: 'open' });
 
-    // Template
     const template = document.createElement('template');
     template.innerHTML = `
       <link rel="stylesheet" href="./src/sass/style.css">
@@ -43,14 +39,12 @@ class ContactForm extends HTMLElement {
 
     shadow.appendChild(template.content.cloneNode(true));
 
-    // Add event listener to the button
     const button = shadow.querySelector('.form__view__fields__btn');
     button.addEventListener('click', () => {
       this.handleSubmit();
     });
   }
 
-  // Method to get current form values
   getFormData() {
     const shadow = this.shadowRoot;
     return {
@@ -61,7 +55,6 @@ class ContactForm extends HTMLElement {
     };
   }
 
-  // Handle form submission (you can customize this)
   handleSubmit() {
     const shadow = this.shadowRoot;
     const nameInput = shadow.getElementById('name');
@@ -69,36 +62,30 @@ class ContactForm extends HTMLElement {
     const questionTextarea = shadow.getElementById('question');
     const agreeCheckbox = shadow.getElementById('agree');
 
-    // Reset previous errors
     [nameInput, emailInput, questionTextarea].forEach(el => {
         el.classList.remove('invalid');
     });
 
     let isValid = true;
 
-    // Validate Name
     if (!nameInput.value.trim()) {
         nameInput.classList.add('invalid');
         isValid = false;
     }
 
-    // Validate Email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(emailInput.value)) {
         emailInput.classList.add('invalid');
         isValid = false;
     }
 
-    // Validate Question
     if (!questionTextarea.value.trim()) {
         questionTextarea.classList.add('invalid');
         isValid = false;
     }
 
-    // Validate Agreement (optional: if required)
-    // Validate Agreement
     const agreeContainer = shadow.querySelector('.form__view__fields__agree');
-    agreeContainer.classList.remove('invalid'); // reset
+    agreeContainer.classList.remove('invalid');
 
     if (!agreeCheckbox.checked) {
         agreeContainer.classList.add('invalid');
@@ -112,11 +99,9 @@ class ContactForm extends HTMLElement {
         return;
     }
 
-    // Form is valid → collect data
     const data = this.getFormData();
     console.log('Form submitted:', data);
 
-    // Emit event
     this.dispatchEvent(
         new CustomEvent('formSubmit', {
         detail: data,
@@ -127,5 +112,4 @@ class ContactForm extends HTMLElement {
     }
 }
 
-// Register the custom element
 customElements.define('contact-form', ContactForm);

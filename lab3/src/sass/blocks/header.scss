@@ -1,443 +1,13 @@
-/*@use "../base/variables.scss" as *;
-
-// Общий header — базовые свойства
-.header {
-	position: relative;
-	width: 100%;
-	padding: 20px 0;
-
-	// Десктопная версия (по умолчанию)
-	@media screen and (min-width: 401px) {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-
-		&__logo {
-			position: absolute;
-			left: 50%;
-			transform: translateX(-50%);
-			width: 100px;
-			height: 100px;
-			z-index: 2;
-		}
-
-		&__nav {
-			position: absolute;
-			top: 100%;
-			left: 50%;
-			transform: translateX(-53%);
-			white-space: nowrap;
-			margin-top: 40px;
-
-			&-list {
-				display: flex;
-				gap: 30px;
-				list-style: none;
-				padding: 0;
-				margin: 0;
-			}
-
-			&-link {
-				text-decoration: none;
-				color: $dark;
-				font-family: inherit;
-				font-size: 15px;
-				font-weight: 300;
-				text-transform: uppercase;
-				transition: color 0.3s ease;
-
-				&:hover {
-					color: #000;
-				}
-			}
-		}
-
-		&__icons {
-			margin-left: auto; // прижимаем к правому краю
-			display: flex;
-			align-items: center;
-			gap: 15px;
-
-			a {
-				display: block;
-				color: $dark;
-				span {
-					display: block;
-					width: 20px;
-					height: 20px;
-				}
-			}
-		}
-
-		// Скрыть бургер на десктопе
-		.burger {
-			display: none;
-		}
-	}
-
-	// Мобильная версия
-	@media screen and (max-width: 400px) {
-		position: static;
-		margin: 50px auto 0 auto;
-		padding: 0;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-
-		&__logo {
-			width: 100px;
-			height: 100px;
-			margin-bottom: 30px;
-		}
-
-		&__menu {
-			display: none; // скрыто — используется бургер
-		}
-
-		&__icons {
-			position: absolute;
-			top: 20px;
-			right: 20px;
-			margin: 0;
-			transform: none;
-			align-items: flex-start;
-			gap: 15px;
-
-			a {
-				display: block;
-				color: $dark;
-				span {
-					display: block;
-					width: 20px;
-					height: 20px;
-				}
-			}
-		}
-	}
-}
-
-// === Бургер-меню (общий для мобильных) ===
-.burger {
-	position: absolute;
-	left: 20px;
-	top: 20px;
-	display: flex;
-	height: 23px;
-	flex-direction: column;
-	row-gap: 10px;
-	padding-right: 35px;
-	cursor: pointer;
-
-	span {
-		display: block;
-		width: 20px;
-		height: 1px;
-		background-color: $dark;
-		transition: all 0.3s ease;
-	}
-
-	// Скрыть на десктопе — уже учтено выше, но можно оставить для явности
-	@media screen and (min-width: 401px) {
-		display: none;
-	}
-}
-
-// === Оверлей и сайдбар (не зависит от header) ===
-.menu-overlay {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.5);
-	z-index: 999;
-	opacity: 0;
-	visibility: hidden;
-	transition: opacity 0.3s ease, visibility 0.3s ease;
-
-	&.active {
-		opacity: 1;
-		visibility: visible;
-	}
-}
-
-.menu-sidebar {
-	position: fixed;
-	top: 0;
-	left: -300px;
-	width: 300px;
-	height: 100%;
-	background-color: #fff;
-	z-index: 1000;
-	transition: left 0.3s ease;
-	padding: 40px 20px;
-
-	&.active {
-		left: 0;
-	}
-}
-
-.menu-close {
-	position: absolute;
-	top: 20px;
-	right: 20px;
-	font-size: 30px;
-	background: none;
-	border: none;
-	cursor: pointer;
-	color: $dark;
-	line-height: 1;
-}
-
-.menu-sidebar nav ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-
-	li {
-		margin-bottom: 20px;
-
-		a {
-			text-decoration: none;
-			color: $dark;
-			font-size: 18px;
-			font-weight: bold;
-			text-transform: uppercase;
-			transition: color 0.2s ease;
-
-			&:hover {
-				color: #999;
-			}
-		}
-	}
-}
-
-@use "../base/variables.scss" as *;
-
-// Общий header — базовые свойства
-.header {
-	position: relative;
-	width: 100%;
-	padding: 20px 0;
-
-	// Десктопная версия (по умолчанию)
-	@media screen and (min-width: 401px) {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-
-		&__logo {
-			position: absolute;
-			left: 50%;
-			transform: translateX(-50%);
-			width: 100px;
-			height: 100px;
-			z-index: 2;
-		}
-
-		&__nav {
-			position: absolute;
-			top: 100%;
-			left: 50%;
-			transform: translateX(-53%);
-			white-space: nowrap;
-			margin-top: 40px;
-
-			&-list {
-				display: flex;
-				gap: 30px;
-				list-style: none;
-				padding: 0;
-				margin: 0;
-			}
-
-			&-link {
-				text-decoration: none;
-				color: $dark;
-				font-family: inherit;
-				font-size: 15px;
-				font-weight: 300;
-				text-transform: uppercase;
-				transition: color 0.3s ease;
-
-				&:hover {
-					color: #000;
-				}
-			}
-		}
-
-		&__icons {
-			margin-left: auto; // прижимаем к правому краю
-			display: flex;
-			align-items: center;
-			gap: 15px;
-
-			a {
-				display: block;
-				color: $dark;
-				span {
-					display: block;
-					width: 20px;
-					height: 20px;
-				}
-			}
-		}
-
-		// Скрыть бургер на десктопе
-		.burger {
-			display: none;
-		}
-	}
-
-	// Мобильная версия
-	@media screen and (max-width: 400px) {
-		position: static;
-		margin: 50px auto 0 auto;
-		padding: 0;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-
-		&__logo {
-			width: 100px;
-			height: 100px;
-			margin-bottom: 30px;
-		}
-
-		&__menu {
-			display: none; // скрыто — используется бургер
-		}
-
-		&__icons {
-			position: absolute;
-			top: 20px;
-			right: 20px;
-			margin: 0;
-			transform: none;
-			align-items: flex-start;
-			gap: 15px;
-
-			a {
-				display: block;
-				color: $dark;
-				span {
-					display: block;
-					width: 20px;
-					height: 20px;
-				}
-			}
-		}
-	}
-}
-
-// === Бургер-меню (общий для мобильных) ===
-.burger {
-	position: absolute;
-	left: 20px;
-	top: 20px;
-	display: flex;
-	height: 23px;
-	flex-direction: column;
-	row-gap: 10px;
-	padding-right: 35px;
-	cursor: pointer;
-
-	span {
-		display: block;
-		width: 20px;
-		height: 1px;
-		background-color: $dark;
-		transition: all 0.3s ease;
-	}
-
-	// Скрыть на десктопе — уже учтено выше, но можно оставить для явности
-	@media screen and (min-width: 401px) {
-		display: none;
-	}
-}
-
-// === Оверлей и сайдбар (не зависит от header) ===
-.menu-overlay {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.5);
-	z-index: 999;
-	opacity: 0;
-	visibility: hidden;
-	transition: opacity 0.3s ease, visibility 0.3s ease;
-
-	&.active {
-		opacity: 1;
-		visibility: visible;
-	}
-}
-
-.menu-sidebar {
-	position: fixed;
-	top: 0;
-	left: -300px;
-	width: 300px;
-	height: 100%;
-	background-color: #fff;
-	z-index: 1000;
-	transition: left 0.3s ease;
-	padding: 40px 20px;
-
-	&.active {
-		left: 0;
-	}
-}
-
-.menu-close {
-	position: absolute;
-	top: 20px;
-	right: 20px;
-	font-size: 30px;
-	background: none;
-	border: none;
-	cursor: pointer;
-	color: $dark;
-	line-height: 1;
-}
-
-.menu-sidebar nav ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-
-	li {
-		margin-bottom: 20px;
-
-		a {
-			text-decoration: none;
-			color: $dark;
-			font-size: 18px;
-			font-weight: bold;
-			text-transform: uppercase;
-			transition: color 0.2s ease;
-
-			&:hover {
-				color: #999;
-			}
-		}
-	}
-}*/
-
 @use "../base/variables.scss" as *;
 
 .header {
 	position: static;
 	margin: 50px auto 0 auto;
 	width: 100%;
-	/*padding-top: 50px;*/
 	
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	/*justify-content: space-between;*/
 	&__logo {
 		width: 100px;
 		height: 100px;
@@ -477,8 +47,6 @@
 	}
 }
 
-// Стили для бургера — оставьте как есть
-
 .burger {
 	position: absolute;
 	left: 20px;
@@ -488,7 +56,7 @@
 	flex-direction: column;
 	row-gap: 10px;
 	padding-right: 35px;
-	cursor: pointer; // Добавим курсор-рука
+	cursor: pointer;
 
 	span {
 		display: block;
@@ -503,14 +71,13 @@
 	}
 }
 
-// Стили для затемнения и меню
 .menu-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); // Полупрозрачное затемнение
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
   opacity: 0;
   visibility: hidden;
@@ -525,7 +92,7 @@
 .menu-sidebar {
   position: fixed;
   top: 0;
-  left: -300px; // Сначала скрыто за левым краем
+  left: -300px;
   width: 300px;
   height: 100%;
   background-color: #fff;
@@ -534,7 +101,7 @@
   padding: 40px 20px;
 
   &.active {
-    left: 0; // Выезжает слева
+    left: 0;
   }
 }
 
