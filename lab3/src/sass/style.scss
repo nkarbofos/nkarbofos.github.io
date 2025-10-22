@@ -1,20 +1,21 @@
-@use "libs/modern-normalize.min.css";
-@use "libs/fontello.css";
-@use "base/basic.scss";
+@use "./libs/modern-normalize.min.css";
+@use "./libs/fontello.css";
+@use "./base/basic.scss";
 
-@use "blocks/header.scss";
-@use "blocks/container.scss";
-@use "blocks/promo.scss";
-@use "blocks/about.scss";
-@use "blocks/form.scss";
-@use "blocks/works.scss";
-@use "blocks/catalog.scss";
-@use "blocks/footer.scss";
-@use "blocks/posts.scss";
+@use "./blocks/header.scss";
+@use "./blocks/container.scss";
+@use "./blocks/promo.scss";
+@use "./blocks/about.scss";
+@use "./blocks/form.scss";
+@use "./blocks/works.scss";
+@use "./blocks/catalog.scss";
+@use "./blocks/footer.scss";
+@use "./blocks/posts.scss";
 
-@use "blocks/history.scss";
+@use "./blocks/history.scss";
+@use "./blocks/map.scss";
 
-@use "ui/titles.scss";
-@use "ui/images.scss";
-@use "ui/input.scss";
-@use "ui/buttons.scss";
+@use "./ui/titles.scss";
+@use "./ui/images.scss";
+@use "./ui/input.scss";
+@use "./ui/buttons.scss";

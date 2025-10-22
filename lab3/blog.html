@@ -12,19 +12,19 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;1,400&display=swap"
 		rel="stylesheet" />
-	<link rel="stylesheet" href="src/sass/style.css">
+	<link rel="stylesheet" href="./src/sass/style.css">
 </head>
 
 <body>
     <section class="header">
 		<div class="burger"><span></span><span></span><span></span></div>
 		<a href="#" class="header__logo"
-			><img src="src/logo/logo.png" alt="logo"
+			><img src="./src/logo/logo.png" alt="logo"
 		/></a>
 		<div class="title-menu header__menu">
-			<a href="/catalog.html">Catalog</a>
-			<a href="/blog.html">Blog</a>
-			<a href="/about.html">About</a>
+			<a href="./catalog.html">Catalog</a>
+			<a href="./blog.html">Blog</a>
+			<a href="./about.html">About</a>
 		</div>
 	</section>
 
@@ -39,61 +39,16 @@
         </div>
     </div>
 
-	<footer class="footer">
-		<div class="container">
-			<div class="footer__columns">
-				<div class="footer__column">
-					<h4 class="footer__title">NEWSLETTER</h4>
-					<p class="footer__text">Keep up to date with news and promotions</p>
-					<form class="footer__form">
-						<input type="email" placeholder="Enter your e-mail" class="footer__input" required>
-						<label class="footer__checkbox">
-							<input type="checkbox" name="terms">
-							<span>I agree with the <a href="#" class="footer__link">terms</a></span>
-						</label>
-						<button type="submit" class="footer__btn">SUBMIT</button>
-					</form>
-				</div>
+	<footer id="footer-placeholder"></footer>
+	<script>
+		fetch('footer.html')
+			.then(response => response.text())
+			.then(data => {
+				document.getElementById('footer-placeholder').outerHTML = data;
+			});
+	</script>
 
-				<div class="footer__column">
-					<h4 class="footer__title">DISCOVER</h4>
-					<ul class="footer__list">
-						<li><a href="about.html" class="footer__link">About Us</a></li>
-						<li><a href="blog.html" class="footer__link">Blog</a></li>
-					</ul>
-				</div>
-
-				<div class="footer__column">
-					<h4 class="footer__title">SHOPPING</h4>
-					<ul class="footer__list">
-						<li><a href="catalog.html" class="footer__link">Catalog</a></li>
-					</ul>
-				</div>
-
-				<div class="footer__column">
-					<h4 class="footer__title">INFORMATION</h4>
-					<ul class="footer__list">
-						<li><a href="#" class="footer__link">Terms and Conditions</a></li>
-					</ul>
-				</div>
-
-				<div class="footer__column">
-					<h4 class="footer__title">FOLLOW US</h4>
-					<div class="footer__social">
-						<a href="#" class="footer__social-icon"><span class="icon-facebook"></span></a>
-						<a href="#" class="footer__social-icon"><span class="icon-instagram"></span></a>
-						<a href="#" class="footer__social-icon"><span class="icon-pinterest"></span></a>
-					</div>
-				</div>
-			</div>
-
-			<div class="footer__copyright">
-				© Copyright 2025, Ceramic soul
-			</div>
-		</div>
-	</footer>
-
-	<script type="module" src="src/js/posts.js"></script>
-	<script type="module" src="src/js/script.js"></script>
+	<script type="module" src="./src/js/posts.js"></script>
+	<script type="module" src="./src/js/script.js"></script>
 </body>
 </html>

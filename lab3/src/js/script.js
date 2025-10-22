@@ -1,4 +1,4 @@
-import "src/sass/style.scss";
+import "../sass/style.scss";
 document.addEventListener('DOMContentLoaded', () => {
 	const footerForm = document.querySelector('.footer__form');
 	if (footerForm) {

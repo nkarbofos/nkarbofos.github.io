@@ -133,7 +133,7 @@ summary {
 
 @font-face {
   font-family: "fontello";
-  src: url("src/font/fontello.woff2") format("woff2"), url("src/font/fontello.woff") format("woff");
+  src: url("../font/fontello.woff2") format("woff2"), url("../font/fontello.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -1046,6 +1046,7 @@ body {
 }
 .form__view__fields__vase {
   grid-area: 5/2;
+  margin-top: auto;
 }
 .form__view__fields__vase img {
   margin-top: auto;
@@ -1752,6 +1753,17 @@ body {
   .history__view__desc {
     font-size: 16px;
   }
+}
+
+.map {
+  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.map__title {
+  margin-bottom: 40px;
 }
 
 .title-menu {

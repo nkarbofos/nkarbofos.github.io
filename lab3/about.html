@@ -18,21 +18,21 @@
 			href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"
 		/>
 		<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
-		<script src="src/js/swiper-init.js"></script>
+		<script src="./src/js/swiper-init.js"></script>
 
-		<link rel="stylesheet" href="src/sass/style.css">
+		<link rel="stylesheet" href="./src/sass/style.css">
 	</head>
 	<body>
 		<div class="container">
             <section class="header">
                 <div class="burger"><span></span><span></span><span></span></div>
                 <a href="#" class="header__logo"
-                    ><img src="src/logo/logo.png" alt="logo"
+                    ><img src="./src/logo/logo.png" alt="logo"
                 /></a>
                 <div class="title-menu header__menu">
-                    <a href="/catalog.html">Catalog</a>
-                    <a href="/blog.html">Blog</a>
-                    <a href="/about.html">About</a>
+                    <a href="./catalog.html">Catalog</a>
+                    <a href="./blog.html">Blog</a>
+                    <a href="./about.html">About</a>
                 </div>
             </section>
 
@@ -41,7 +41,7 @@
                     Where it all began
                 </h2>
                 <div class="history__view">
-                    <img src="src/img/history/masterclass.jpg" alt="masterclass" class="img-shadow history__view__img" />
+                    <img src="./src/img/history/masterclass.jpg" alt="masterclass" class="img-shadow history__view__img" />
                     <div class="history__view__desc">
                         <p>
                             Our small pottery workshop began as a simple passion project, rooted in a love for handmade artistry and traditional craftsmanship. What started with a single wheel and a few lumps of clay has grown into a cozy creative space where ideas take shape and stories are told through every piece. Inspired by timeless techniques and the beauty of natural materials, we’ve built a place where both beginners and experienced artists can come together, share their skills, and celebrate the art of pottery. Each creation reflects our journey—shaped by hand, fired with care, and made to be cherished.
@@ -57,66 +57,28 @@
             </section>
 
             <contact-form></contact-form>
-			<script type="module" src="src/js/contact-form.js"></script>
+			<script type="module" src="./src/js/contact-form.js"></script>
 			<script>
 				document.addEventListener('formSubmit', (e) => {
 					console.log('Received form data:', e.detail);
 				});
 			</script>
+
+            <section class="map">
+                <h2 class="title-h2-bold map__title">
+                    Find us
+                </h2>
+                <div style="position:relative;overflow:hidden;"><a href="https://yandex.ru/maps/2/saint-petersburg/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Санкт‑Петербург</a><a href="https://yandex.ru/maps/2/saint-petersburg/?ll=30.314997%2C59.938784&utm_medium=mapframe&utm_source=maps&z=11" style="color:#eee;font-size:12px;position:absolute;top:14px;">Яндекс Карты — транспорт, навигация, поиск мест</a><iframe src="https://yandex.ru/map-widget/v1/?ll=30.314997%2C59.938784&z=11" width="560" height="400" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>
+            </section>
         </div>
 
-        <footer class="footer">
-            <div class="container">
-                <div class="footer__columns">
-                    <div class="footer__column">
-                        <h4 class="footer__title">NEWSLETTER</h4>
-                        <p class="footer__text">Keep up to date with news and promotions</p>
-                        <form class="footer__form">
-                            <input type="email" placeholder="Enter your e-mail" class="footer__input" required>
-                            <label class="footer__checkbox">
-                                <input type="checkbox" name="terms">
-                                <span>I agree with the <a href="#" class="footer__link">terms</a></span>
-                            </label>
-                            <button type="submit" class="footer__btn">SUBMIT</button>
-                        </form>
-                    </div>
-
-                    <div class="footer__column">
-                        <h4 class="footer__title">DISCOVER</h4>
-                        <ul class="footer__list">
-                            <li><a href="about.html" class="footer__link">About Us</a></li>
-                            <li><a href="blog.html" class="footer__link">Blog</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer__column">
-                        <h4 class="footer__title">SHOPPING</h4>
-                        <ul class="footer__list">
-                            <li><a href="catalog.html" class="footer__link">Catalog</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer__column">
-                        <h4 class="footer__title">INFORMATION</h4>
-                        <ul class="footer__list">
-                            <li><a href="#" class="footer__link">Terms and Conditions</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer__column">
-                        <h4 class="footer__title">FOLLOW US</h4>
-                        <div class="footer__social">
-                            <a href="#" class="footer__social-icon"><span class="icon-facebook"></span></a>
-                            <a href="#" class="footer__social-icon"><span class="icon-instagram"></span></a>
-                            <a href="#" class="footer__social-icon"><span class="icon-pinterest"></span></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="footer__copyright">
-                    © Copyright 2025, Ceramic soul
-                </div>
-            </div>
-        </footer>
+        <footer id="footer-placeholder"></footer>
+        <script>
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-placeholder').outerHTML = data;
+                });
+        </script>
 	</body>
 </html>

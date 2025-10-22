@@ -10,11 +10,11 @@ class ContactForm extends HTMLElement {
     // Template
     const template = document.createElement('template');
     template.innerHTML = `
-      <link rel="stylesheet" href="src/sass/style.css">
+      <link rel="stylesheet" href="./src/sass/style.css">
       <section class="form">
         <h2 class="title-h2-bold form__title">Get in touch</h2>
         <div class="form__view">
-          <img src="../img/form/tea.jpg" alt="tea" class="img-shadow form__view__img" />
+          <img src="./src/img/form/tea.jpg" alt="tea" class="img-shadow form__view__img" />
           <div class="form__view__fields">
             <div class="form__view__fields__name">
               <label for="name">Name</label>
@@ -30,11 +30,11 @@ class ContactForm extends HTMLElement {
             </div>
             <div class="form__view__fields__agree">
               <input type="checkbox" id="agree" name="agree" checked />
-              <label for="agree">I agree with the terms</label>
+              <label for="agree">I agree with the <a href="#" class="footer__link">terms</a></label>
             </div>
             <button class="btn-default form__view__fields__btn">send request</button>
             <div class="form__view__fields__vase">
-              <img src="../img/form/vase.png" alt="vase" />
+              <img src="./src/img/form/vase.png" alt="vase" />
             </div>
           </div>
         </div>
