@@ -1,0 +1,16 @@
+- [x] Initialize Vite + React + TypeScript project structure
+- [x] Install and configure Tailwind CSS
+- [x] Set up environment variables and API configuration
+- [x] Create project folder structure (components, hooks, services, i18n, styles)
+- [x] Implement OpenWeatherMap API service layer
+- [x] Create 8/9 custom hooks (useDebounce, useLocalStorage, useGeolocation, etc.)
+- [ ] Fix useI18n hook
+- [ ] Set up i18n system with RU/EN translations
+- [ ] Build 12 core components (layout, search, weather, common)
+- [ ] Implement city search with debouncing and suggestions
+- [ ] Add current location detection via Geolocation API
+- [ ] Create weather display components (current, forecast, AQI)
+- [ ] Implement user preferences (units, language, dark mode)
+- [ ] Add search history with LocalStorage persistence
+- [ ] Test all features and verify acceptance criteria
+- [ ] Final polish and deployment preparation
