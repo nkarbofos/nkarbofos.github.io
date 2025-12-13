@@ -19,6 +19,7 @@ import ArchiveFilters from './components/archive/ArchiveFilters';
 import Profile from './components/profile/Profile';
 import UserProfile from './components/profile/UserProfile';
 import { Container } from '@mui/material';
+import { getBasePath } from './utils/paths';
 
 const theme = createTheme({
   palette: {
@@ -87,7 +88,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <AuthProvider>
-        <Router basename="/lab5">
+        <Router basename={getBasePath().replace(/\/$/, '')}>
           <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
             <Navbar />
             <Box component="main" sx={{ flexGrow: 1 }}>
