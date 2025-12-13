@@ -87,7 +87,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <AuthProvider>
-        <Router>
+        <Router basename="/lab5">
           <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
             <Navbar />
             <Box component="main" sx={{ flexGrow: 1 }}>
