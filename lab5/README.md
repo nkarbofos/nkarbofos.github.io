@@ -94,7 +94,7 @@ service firebase.storage {
 В Firebase Console создайте следующие индексы:
 
 1. Collection: `archives`
-   - Fields: `tags` (Array), `uploadedAt` (Descending)
+   - Fields: `tags` (Array), `где` (Descending)
 2. Collection: `archives`
    - Fields: `userId` (Ascending), `uploadedAt` (Descending)
 
@@ -110,6 +110,27 @@ npm run build
 # Предпросмотр продакшен сборки
 npm run preview
 ```
+
+## Деплой на GitHub Pages
+
+Проект настроен для деплоя на GitHub Pages в подпапке `/lab5/`.
+
+### Автоматический деплой (через GitHub Actions)
+
+1. Убедитесь, что файл `.github/workflows/deploy.yml` существует
+2. Запушьте изменения в ветку `main` или `master`
+3. GitHub Actions автоматически соберет и задеплоит проект
+4. В настройках репозитория (Settings → Pages) выберите:
+   - Source: `GitHub Actions`
+
+### Ручной деплой
+
+1. Соберите проект: `npm run build`
+2. Скопируйте содержимое папки `dist/` в корень репозитория или в папку `docs/`
+3. Запушьте изменения
+4. В настройках GitHub Pages укажите папку для деплоя
+
+**Важно:** Убедитесь, что в `vite.config.ts` указан правильный `base: '/lab5/'` для вашего пути на GitHub Pages.
 
 ## Структура проекта
 
