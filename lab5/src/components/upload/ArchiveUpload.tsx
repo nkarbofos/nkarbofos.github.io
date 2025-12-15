@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  Container,
   Paper,
   Typography,
   Box,
@@ -61,13 +60,48 @@ const ArchiveUpload: React.FC = () => {
     setLoading(true);
 
     try {
+      // Определяем имя и фамилию с fallback
+      let firstName = userData.firstName?.trim() || '';
+      let lastName = userData.lastName?.trim() || '';
+
+      // Если оба поля пустые, используем fallback
+      if (!firstName && !lastName) {
+        // Пытаемся использовать displayName из Firebase Auth
+        if (currentUser.displayName) {
+          const nameParts = currentUser.displayName.trim().split(/\s+/);
+          firstName = nameParts[0] || '';
+          lastName = nameParts.slice(1).join(' ') || firstName;
+        }
+        
+        // Если все еще пусто, используем email
+        if (!firstName && currentUser.email) {
+          const emailPart = currentUser.email.split('@')[0];
+          firstName = emailPart || 'Пользователь';
+          lastName = 'Пользователь';
+        } else if (!firstName) {
+          // Последний fallback
+          firstName = 'Пользователь';
+          lastName = 'Пользователь';
+        } else if (!lastName) {
+          lastName = firstName;
+        }
+      } else {
+        // Если только одно поле пустое, заполняем его
+        if (!firstName) {
+          firstName = lastName || currentUser.displayName?.split(/\s+/)[0] || currentUser.email?.split('@')[0] || 'Пользователь';
+        }
+        if (!lastName) {
+          lastName = firstName || currentUser.displayName?.split(/\s+/).slice(1).join(' ') || 'Пользователь';
+        }
+      }
+
       // Save link to Firestore
       await createArchive({
         linkName: linkName.trim(),
         githubPagesUrl: githubPagesUrl.trim(),
         userId: currentUser.uid,
-        firstName: userData.firstName,
-        lastName: userData.lastName,
+        firstName,
+        lastName,
         tags,
       });
 
@@ -86,14 +120,12 @@ const ArchiveUpload: React.FC = () => {
   };
 
   return (
-    <Container
-      maxWidth={false}
+    <Box
       sx={{
+        width: '100%',
         mt: { xs: 2, sm: 4, lg: 6 },
         mb: { xs: 2, sm: 4, lg: 6 },
-        px: { xs: 2, sm: 3, lg: 4, xl: 6 },
-        maxWidth: { xs: '100%', sm: '600px', lg: '800px', xl: '900px' },
-        mx: 'auto',
+        px: { xs: 2, sm: 3, md: 4, lg: 5, xl: 6 },
       }}
     >
       <Paper
@@ -241,7 +273,7 @@ const ArchiveUpload: React.FC = () => {
           </Button>
         </Box>
       </Paper>
-    </Container>
+    </Box>
   );
 };
 

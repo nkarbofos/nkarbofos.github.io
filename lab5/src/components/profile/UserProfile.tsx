@@ -54,47 +54,41 @@ const UserProfile: React.FC = () => {
 
   if (authLoading || loading) {
     return (
-      <Container
-        maxWidth={false}
+      <Box
         sx={{
+          width: '100%',
           mt: { xs: 2, sm: 4, lg: 6 },
-          px: { xs: 2, sm: 3, lg: 4, xl: 6 },
-          maxWidth: { xs: '100%', sm: '600px', lg: '800px', xl: '900px' },
-          mx: 'auto',
+          px: { xs: 2, sm: 3, md: 4, lg: 5, xl: 6 },
         }}
       >
         <Box display="flex" justifyContent="center" alignItems="center" minHeight="400px">
           <CircularProgress />
         </Box>
-      </Container>
+      </Box>
     );
   }
 
   if (error || !user) {
     return (
-      <Container
-        maxWidth={false}
+      <Box
         sx={{
+          width: '100%',
           mt: { xs: 2, sm: 4, lg: 6 },
-          px: { xs: 2, sm: 3, lg: 4, xl: 6 },
-          maxWidth: { xs: '100%', sm: '600px', lg: '800px', xl: '900px' },
-          mx: 'auto',
+          px: { xs: 2, sm: 3, md: 4, lg: 5, xl: 6 },
         }}
       >
         <Alert severity="error">{error || 'Пользователь не найден'}</Alert>
-      </Container>
+      </Box>
     );
   }
 
   return (
-    <Container
-      maxWidth={false}
+    <Box
       sx={{
+        width: '100%',
         mt: { xs: 2, sm: 4, lg: 6 },
         mb: { xs: 2, sm: 4, lg: 6 },
-        px: { xs: 2, sm: 3, lg: 4, xl: 6 },
-        maxWidth: { xs: '100%', sm: '600px', lg: '800px', xl: '900px' },
-        mx: 'auto',
+        px: { xs: 2, sm: 3, md: 4, lg: 5, xl: 6 },
       }}
     >
       <Paper
@@ -272,7 +266,7 @@ const UserProfile: React.FC = () => {
           )}
         </Box>
       </Paper>
-    </Container>
+    </Box>
   );
 };
 

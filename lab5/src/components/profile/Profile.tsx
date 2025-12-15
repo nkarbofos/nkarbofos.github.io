@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Container,
   Paper,
   Typography,
   Box,
@@ -102,14 +101,12 @@ const Profile: React.FC = () => {
   }
 
   return (
-    <Container
-      maxWidth={false}
+    <Box
       sx={{
+        width: '100%',
         mt: { xs: 2, sm: 4, lg: 6 },
         mb: { xs: 2, sm: 4, lg: 6 },
-        px: { xs: 2, sm: 3, lg: 4, xl: 6 },
-        maxWidth: { xs: '100%', sm: '600px', lg: '800px', xl: '900px' },
-        mx: 'auto',
+        px: { xs: 2, sm: 3, md: 4, lg: 5, xl: 6 },
       }}
     >
       <Paper
@@ -206,7 +203,7 @@ const Profile: React.FC = () => {
           </Button>
         </Box>
       </Paper>
-    </Container>
+    </Box>
   );
 };
 

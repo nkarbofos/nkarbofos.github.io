@@ -18,7 +18,7 @@ import ArchiveList from './components/archive/ArchiveList';
 import ArchiveFilters from './components/archive/ArchiveFilters';
 import Profile from './components/profile/Profile';
 import UserProfile from './components/profile/UserProfile';
-import { Container } from '@mui/material';
+import MyLinks from './components/profile/MyLinks';
 import { getBasePath } from './utils/paths';
 
 const theme = createTheme({
@@ -69,17 +69,15 @@ const HomePage: React.FC = () => {
   );
 
   return (
-    <Container
-      maxWidth={false}
+    <Box
       sx={{
-        px: { xs: 2, sm: 3, lg: 4, xl: 6 },
-        maxWidth: { xs: '100%', lg: '1400px', xl: '1600px' },
-        mx: 'auto',
+        width: '100%',
+        px: { xs: 2, sm: 3, md: 4, lg: 5, xl: 6 },
       }}
     >
       <ArchiveFilters onFiltersChange={handleFiltersChange} />
       <ArchiveList filters={filters} />
-    </Container>
+    </Box>
   );
 };
 
@@ -108,6 +106,14 @@ function App() {
                   element={
                     <ProtectedRoute>
                       <Profile />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/my-links"
+                  element={
+                    <ProtectedRoute>
+                      <MyLinks />
                     </ProtectedRoute>
                   }
                 />

@@ -40,11 +40,10 @@ const Navbar: React.FC = () => {
     <AppBar position="static">
       <Toolbar
         sx={{
+          width: '100%',
           flexWrap: { xs: 'wrap', sm: 'nowrap' },
           gap: { xs: 1, sm: 0 },
-          maxWidth: { xl: '1920px' },
-          mx: { xl: 'auto' },
-          px: { xl: 4 },
+          px: { xs: 2, sm: 3, md: 4 },
         }}
       >
         <Archive sx={{ mr: { xs: 1, sm: 2 } }} />
@@ -150,6 +149,14 @@ const Navbar: React.FC = () => {
                   }}
                 >
                   Профиль
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleClose();
+                    navigate('/my-links');
+                  }}
+                >
+                  Мои ссылки
                 </MenuItem>
                 <MenuItem onClick={handleLogout}>Выйти</MenuItem>
               </Menu>

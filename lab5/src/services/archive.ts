@@ -6,6 +6,8 @@ import {
   where,
   orderBy,
   Timestamp,
+  deleteDoc,
+  doc,
 } from 'firebase/firestore';
 import { db } from './firebase';
 import type { Archive } from '../types';
@@ -131,6 +133,15 @@ export const getAllUsers = async (): Promise<Array<{ userId: string; firstName: 
   } catch (error) {
     console.error('Error fetching users:', error);
     return [];
+  }
+};
+
+export const deleteArchive = async (archiveId: string): Promise<void> => {
+  try {
+    await deleteDoc(doc(db, 'archives', archiveId));
+  } catch (error) {
+    console.error('Error deleting archive:', error);
+    throw error;
   }
 };
 
