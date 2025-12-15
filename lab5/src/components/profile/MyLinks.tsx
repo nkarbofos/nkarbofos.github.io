@@ -33,7 +33,7 @@ const MyLinks: React.FC = () => {
       const data = await getArchives({ userId: currentUser.uid });
       setArchives(data);
     } catch (err: any) {
-      setError(err.message || 'Ошибка при загрузке ссылок');
+      setError(err.message || 'Ошибка при загрузке проектов');
     } finally {
       setLoading(false);
     }
@@ -99,7 +99,7 @@ const MyLinks: React.FC = () => {
             mb: 2,
           }}
         >
-          Мои ссылки
+          Мои проекты
         </Typography>
         <Typography
           variant="body1"
@@ -109,7 +109,7 @@ const MyLinks: React.FC = () => {
             mb: 4,
           }}
         >
-          Здесь вы можете управлять своими ссылками на проекты
+          Здесь вы можете управлять своими проектами
         </Typography>
       </Paper>
 
@@ -130,7 +130,7 @@ const MyLinks: React.FC = () => {
               fontSize: { xs: '1.125rem', sm: '1.25rem', lg: '1.5rem' },
             }}
           >
-            У вас пока нет ссылок
+            У вас пока нет проектов
           </Typography>
           <Typography
             variant="body2"
@@ -140,7 +140,7 @@ const MyLinks: React.FC = () => {
               mt: 2,
             }}
           >
-            Добавьте свою первую ссылку на проект
+            Добавьте свой первый проект
           </Typography>
         </Paper>
       ) : (

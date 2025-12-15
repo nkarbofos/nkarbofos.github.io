@@ -56,14 +56,16 @@ const Navbar: React.FC = () => {
             textDecoration: 'none',
             color: 'inherit',
             mr: { xs: 0, sm: 4 },
-            fontSize: { xs: '1rem', sm: '1.25rem' },
+            fontSize: { xs: '0.875rem', sm: '1rem', md: '1.1rem' },
+            whiteSpace: { xs: 'normal', sm: 'nowrap' },
+            lineHeight: { xs: 1.2, sm: 1.5 },
           }}
         >
           <Box component="span" sx={{ display: { xs: 'none', sm: 'inline' } }}>
-            Архивы Проектов
+            Великий Национальный репозиторий Карена Вазгеновича
           </Box>
           <Box component="span" sx={{ display: { xs: 'inline', sm: 'none' } }}>
-            Архивы
+            ВНРКВ
           </Box>
         </Typography>
 
@@ -81,7 +83,7 @@ const Navbar: React.FC = () => {
             to="/"
             sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}
           >
-            Архивы
+            Проекты
           </Button>
           {currentUser && (
             <Button
@@ -156,7 +158,7 @@ const Navbar: React.FC = () => {
                     navigate('/my-links');
                   }}
                 >
-                  Мои ссылки
+                  Мои проекты
                 </MenuItem>
                 <MenuItem onClick={handleLogout}>Выйти</MenuItem>
               </Menu>
