@@ -35,6 +35,7 @@ jobs:
           mkdir -p deploy/lab5
           cp -r lab5/dist/* deploy/lab5/
           touch deploy/.nojekyll
+          touch deploy/lab5/.nojekyll
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
