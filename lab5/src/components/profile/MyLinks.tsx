@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Container,
-  Typography,
-  Box,
-  CircularProgress,
-  Alert,
-  Paper,
-} from '@mui/material';
+import { Typography, Box, CircularProgress, Alert, Paper } from '@mui/material';
 import { useAuth } from '../../hooks/useAuth';
 import { getArchives } from '../../services/archive';
 import type { Archive } from '../../types';

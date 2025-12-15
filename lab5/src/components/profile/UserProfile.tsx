@@ -1,15 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Container,
-  Paper,
-  Typography,
-  Box,
-  CircularProgress,
-  Alert,
-  Divider,
-  Link,
-  Chip,
-} from '@mui/material';
+import { Paper, Typography, Box, CircularProgress, Alert, Divider, Link, Chip } from '@mui/material';
 import { Person, Email, Telegram } from '@mui/icons-material';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getUserById } from '../../services/user';
