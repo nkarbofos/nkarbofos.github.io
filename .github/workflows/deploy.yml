@@ -32,10 +32,9 @@ jobs:
 
       - name: Prepare deployment structure
         run: |
-          mkdir -p deploy/lab5
-          cp -r lab5/dist/* deploy/lab5/
+          mkdir -p deploy
+          cp -r lab5/dist/* deploy/
           touch deploy/.nojekyll
-          touch deploy/lab5/.nojekyll
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
