@@ -30,11 +30,14 @@ jobs:
         working-directory: lab5
         run: npm run build
 
-      - name: Create .nojekyll file
-        run: touch lab5/dist/.nojekyll
+      - name: Prepare deployment structure
+        run: |
+          mkdir -p deploy/lab5
+          cp -r lab5/dist/* deploy/lab5/
+          touch deploy/.nojekyll
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: lab5/dist
+          publish_dir: deploy
