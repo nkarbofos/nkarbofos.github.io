@@ -6,7 +6,7 @@ import { useApi } from '../api/http';
 import { authService } from '../services/auth';
 
 export default function RegisterPage() {
-  const { register, applyDbProfile } = useAuth();
+  const { register, applyDbProfile, logout } = useAuth();
   const { request } = useApi();
   const authApi = authService({ request });
   const nav = useNavigate();
@@ -60,8 +60,10 @@ export default function RegisterPage() {
         onClick={() => {
           void (async () => {
             setError(null);
+            let firebaseUserCreated = false;
             try {
               const idToken = await register(email, password);
+              firebaseUserCreated = true;
               const dbProfile = await authApi.registerProfile({
                 email,
                 firstName,
@@ -71,6 +73,9 @@ export default function RegisterPage() {
               applyDbProfile(dbProfile);
               void nav('/');
             } catch (e) {
+              if (firebaseUserCreated) {
+                await logout().catch(() => {});
+              }
               setError(String(e));
             }
           })();

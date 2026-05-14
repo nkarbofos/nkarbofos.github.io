@@ -17,6 +17,12 @@ import { useAuth } from '../state/AuthContext';
 
 export default function Navbar() {
   const { user, userDb, logout } = useAuth();
+  const appUser = userDb ? user : null;
+  const avatarInitial = (
+    userDb?.firstName?.[0] ??
+    appUser?.email?.[0] ??
+    'U'
+  ).toUpperCase();
   const nav = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -50,7 +56,7 @@ export default function Navbar() {
           <Button component={RouterLink} to="/" color="inherit">
             Feed
           </Button>
-          {user ? (
+          {appUser ? (
             <Button component={RouterLink} to="/my-links" color="inherit">
               My Projects
             </Button>
@@ -75,7 +81,7 @@ export default function Navbar() {
               Instructor Dashboard
             </Button>
           ) : null}
-          {user ? (
+          {appUser ? (
             <Button variant="contained" component={RouterLink} to="/upload">
               Create Project
             </Button>
@@ -89,7 +95,7 @@ export default function Navbar() {
               </Button>
             </>
           )}
-          {user ? (
+          {appUser ? (
             <>
               <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}>
                 <Avatar
@@ -100,7 +106,7 @@ export default function Navbar() {
                     fontSize: 14,
                   }}
                 >
-                  {(userDb?.firstName?.[0] ?? user.email?.[0] ?? 'U').toUpperCase()}
+                  {avatarInitial}
                 </Avatar>
               </IconButton>
               <Menu

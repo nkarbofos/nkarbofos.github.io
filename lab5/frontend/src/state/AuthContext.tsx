@@ -32,35 +32,55 @@ const Ctx = createContext<AuthCtx | null>(null);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<FirebaseUser | null>(null);
   const [userDb, setUserDb] = useState<UserDb | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [firebaseLoading, setFirebaseLoading] = useState(true);
+  const [profileLoading, setProfileLoading] = useState(false);
 
   useEffect(() => {
     return onAuthStateChanged(auth, (u) => {
       setUser(u);
-      setLoading(false);
+      setFirebaseLoading(false);
     });
   }, []);
 
   useEffect(() => {
+    let cancelled = false;
+
     void (async () => {
       if (!user) {
         setUserDb(null);
+        setProfileLoading(false);
         return;
       }
-      const token = await user.getIdToken();
-      const res = await fetch(`${API_BASE_URL}/api/auth/me`, {
-        headers: { Authorization: `Bearer ${token}` },
-      }).catch(() => null);
-      if (!res || !res.ok) {
-        setUserDb(null);
-        return;
+
+      setProfileLoading(true);
+      try {
+        const token = await user.getIdToken();
+        const res = await fetch(`${API_BASE_URL}/api/auth/me`, {
+          headers: { Authorization: `Bearer ${token}` },
+        }).catch(() => null);
+        if (cancelled) return;
+        if (!res || !res.ok) {
+          setUserDb((current) =>
+            current?.firebaseUid === user.uid ? current : null,
+          );
+          return;
+        }
+        const json = (await res.json()) as UserDb;
+        if (cancelled) return;
+        setUserDb(json);
+      } finally {
+        if (!cancelled) setProfileLoading(false);
       }
-      const json = (await res.json()) as UserDb;
-      setUserDb(json);
     })();
+
+    return () => {
+      cancelled = true;
+    };
   }, [user]);
 
   const value = useMemo<AuthCtx>(() => {
+    const loading = firebaseLoading || profileLoading;
+
     return {
       user,
       userDb,
@@ -81,7 +101,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         await signOut(auth);
       },
     };
-  }, [user, userDb, loading]);
+  }, [user, userDb, firebaseLoading, profileLoading]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

@@ -23,7 +23,7 @@ import { appTheme } from './theme';
 import { useLocation } from 'react-router-dom';
 
 function Protected({ children }: { children: React.ReactNode }) {
-  const { user, loading } = useAuth();
+  const { userDb, loading } = useAuth();
   if (loading)
     return (
       <Box
@@ -38,7 +38,7 @@ function Protected({ children }: { children: React.ReactNode }) {
         </Box>
       </Box>
     );
-  if (!user) return <Navigate to="/login" replace />;
+  if (!userDb) return <Navigate to="/login" replace />;
   return <>{children}</>;
 }
 
@@ -49,8 +49,8 @@ function AdminOnly({ children }: { children: React.ReactNode }) {
 }
 
 function Sidebar() {
-  const { user } = useAuth();
-  if (!user) return null;
+  const { userDb } = useAuth();
+  if (!userDb) return null;
   return (
     <Box
       component="aside"
