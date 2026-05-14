@@ -1,0 +1,109 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+model User {
+  id          String   @id @default(uuid()) @db.Uuid
+  email       String   @unique @db.VarChar(255)
+  firstName   String   @map("first_name") @db.VarChar(255)
+  lastName    String   @map("last_name") @db.VarChar(255)
+  telegramUrl String?  @map("telegram_url") @db.VarChar(255)
+  avatarUrl   String?  @map("avatar_url") @db.VarChar(2048)
+  firebaseUid String?  @unique @map("firebase_uid") @db.VarChar(255)
+  role        UserRole @default(USER) @map("role")
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  links   Link[]
+  reviews Review[] @relation("UserReviews")
+
+  @@map("users")
+}
+
+model Review {
+  id     String  @id @default(uuid()) @db.Uuid
+  userId String  @map("user_id") @db.Uuid
+  score  Int?    @db.SmallInt
+  comment String? @db.Text
+
+  user  User  @relation("UserReviews", fields: [userId], references: [id], onDelete: Restrict)
+  links Link[]
+
+  @@index([userId])
+  @@map("reviews")
+}
+
+model Link {
+  id            String   @id @default(uuid()) @db.Uuid
+  userId        String   @map("user_id") @db.Uuid
+  reviewId      String?  @map("review_id") @db.Uuid
+  linkName      String   @map("link_name") @db.VarChar(255)
+  githubPagesUrl String  @map("github_pages_url") @db.VarChar(255)
+  createdAt     DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  review Review? @relation(fields: [reviewId], references: [id], onDelete: SetNull)
+
+  tags    LinkTag[]
+  courses LinkCourse[]
+
+  @@index([userId])
+  @@index([reviewId])
+  @@map("links")
+}
+
+model Tag {
+  id   String @id @default(uuid()) @db.Uuid
+  name String @unique @db.VarChar(255)
+
+  links LinkTag[]
+
+  @@map("tags")
+}
+
+model Course {
+  id   String  @id @default(uuid()) @db.Uuid
+  name String  @unique @db.VarChar(255)
+  code String? @db.VarChar(255)
+
+  links LinkCourse[]
+
+  @@map("courses")
+}
+
+model LinkTag {
+  id     String @id @default(uuid()) @db.Uuid
+  linkId String @map("link_id") @db.Uuid
+  tagId  String @map("tag_id") @db.Uuid
+
+  link Link @relation(fields: [linkId], references: [id], onDelete: Cascade)
+  tag  Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@unique([linkId, tagId])
+  @@index([tagId])
+  @@map("link_tags")
+}
+
+model LinkCourse {
+  id       String @id @default(uuid()) @db.Uuid
+  linkId   String @map("link_id") @db.Uuid
+  courseId String @map("course_id") @db.Uuid
+
+  link   Link   @relation(fields: [linkId], references: [id], onDelete: Cascade)
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([linkId, courseId])
+  @@index([courseId])
+  @@map("link_courses")
+}
+

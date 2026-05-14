@@ -18,31 +18,31 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '24'
           cache: 'npm'
-          cache-dependency-path: lab5/package-lock.json
+          cache-dependency-path: lab5/frontend/package-lock.json
 
       - name: Install dependencies
-        working-directory: lab5
+        working-directory: lab5/frontend
         run: npm ci
 
       - name: Build
-        working-directory: lab5
+        working-directory: lab5/frontend
         env:
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
+          VITE_BASE_PATH: ${{ vars.VITE_BASE_PATH || '/' }}
           VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
           VITE_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}
           VITE_FIREBASE_PROJECT_ID: ${{ secrets.VITE_FIREBASE_PROJECT_ID }}
-          VITE_FIREBASE_STORAGE_BUCKET: ${{ secrets.VITE_FIREBASE_STORAGE_BUCKET }}
-          VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}
           VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID }}
         run: npm run build
 
       - name: Prepare deployment structure
         run: |
           mkdir -p deploy
-          cp -r lab5/dist/* deploy/
-          # Сохраняем README.md для информации
-          cp README.md deploy/README.md 2>/dev/null || true
+          cp -r lab5/frontend/dist/* deploy/
+          cp deploy/index.html deploy/404.html
+          cp lab5/README.md deploy/README.md 2>/dev/null || true
           touch deploy/.nojekyll
 
       - name: Deploy to GitHub Pages

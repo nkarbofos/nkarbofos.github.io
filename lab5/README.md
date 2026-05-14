@@ -1,165 +1,164 @@
-# Архивы Проектов - React приложение
+# Lab 5: каталог проектов
 
-Веб-приложение для загрузки и управления архивами исходного кода проектов-сайтов с системой аутентификации и фильтрацией.
+Fullstack-приложение для публикации ссылок на GitHub Pages проекты, просмотра профилей пользователей, тегов, курсов и ревью. Frontend написан на React + Vite, backend на NestJS + Prisma.
 
-## Возможности
+## Структура
 
-- 🔐 Система аутентификации пользователей (регистрация/вход)
-- 📦 Загрузка архивов проектов (ZIP, RAR, 7Z, TAR, GZ)
-- 🏷️ Теги для классификации проектов
-- 🔗 Ссылки на GitHub Pages для каждого проекта
-- 🔍 Фильтрация по тегам и пользователям
-- 📱 Адаптивный дизайн (Material-UI)
+```text
+lab5/
+├── src/                 # NestJS backend
+├── prisma/              # Prisma schema и миграции PostgreSQL
+├── scripts/             # smoke-проверки
+├── test/                # e2e-тесты backend
+├── md_files/            # подробные отчёты и инструкции по лабораторным
+├── frontend/            # React + Vite frontend
+├── package.json         # backend scripts
+└── README.md
+```
 
-## Технологии
+## Требования
 
-- **React 19** + **TypeScript**
-- **Vite** - сборщик
-- **Material-UI (MUI)** - UI библиотека
-- **Firebase** - Backend (Firestore, Authentication, Storage)
-- **React Router** - маршрутизация
-- **React Dropzone** - загрузка файлов
+- Node.js `24.x` (в `package.json` указан `24.14.0`).
+- PostgreSQL и переменная `DATABASE_URL`.
+- Firebase project: frontend использует Firebase Client SDK, backend проверяет Firebase ID token через Firebase Admin SDK.
+- Для загрузки файлов можно настроить S3/Yandex Object Storage переменные.
 
-## Установка и настройка
+## Переменные окружения
 
-### 1. Установка зависимостей
+Backend читает `.env` из корня `lab5`. Создайте файл из шаблона:
+
+```bash
+cp .env.example .env
+```
+
+Основные backend-переменные:
+
+```env
+DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DB?sslmode=require"
+PORT=3010
+FRONTEND_ORIGINS="http://localhost:5173,https://nkarbofos.github.io"
+
+FIREBASE_PROJECT_ID="your-firebase-project-id"
+FIREBASE_CLIENT_EMAIL="firebase-adminsdk-xxxxx@your-project.iam.gserviceaccount.com"
+FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
+```
+
+Frontend читает `frontend/.env`:
+
+```bash
+cp frontend/.env.example frontend/.env
+```
+
+```env
+VITE_API_BASE_URL="http://localhost:3010"
+VITE_FIREBASE_API_KEY="your-firebase-web-api-key"
+VITE_FIREBASE_AUTH_DOMAIN="your-project.firebaseapp.com"
+VITE_FIREBASE_PROJECT_ID="your-firebase-project-id"
+VITE_FIREBASE_APP_ID="your-firebase-web-app-id"
+```
+
+Не коммитьте реальные `.env` файлы. `FIREBASE_PRIVATE_KEY`, `DATABASE_URL` и S3 credentials являются секретами.
+
+## Локальный запуск
+
+Установите backend-зависимости и подготовьте Prisma:
 
 ```bash
 npm install
+npx prisma generate
+npx prisma migrate deploy
 ```
 
-### 2. Настройка Firebase
-
-1. Создайте проект в [Firebase Console](https://console.firebase.google.com/)
-2. Включите следующие сервисы:
-   - Authentication (Email/Password)
-   - Firestore Database
-   - Storage
-3. Скопируйте конфигурационные данные Firebase
-4. Создайте файл `.env` в корне проекта:
-
-```env
-VITE_FIREBASE_API_KEY=your-api-key
-VITE_FIREBASE_AUTH_DOMAIN=your-auth-domain
-VITE_FIREBASE_PROJECT_ID=your-project-id
-VITE_FIREBASE_STORAGE_BUCKET=your-storage-bucket
-VITE_FIREBASE_MESSAGING_SENDER_ID=your-messaging-sender-id
-VITE_FIREBASE_APP_ID=your-app-id
-```
-
-### 3. Настройка Firestore правил
-
-В Firebase Console перейдите в Firestore Database > Rules и установите:
-
-```javascript
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    // Archives collection
-    match /archives/{archiveId} {
-      allow read: if request.auth != null;
-      allow create: if request.auth != null && request.auth.uid == request.resource.data.userId;
-      allow update: if request.auth != null && request.auth.uid == resource.data.userId;
-      allow delete: if request.auth != null && request.auth.uid == resource.data.userId;
-    }
-    
-    // Users collection
-    match /users/{userId} {
-      allow read: if request.auth != null;
-      allow create: if request.auth != null && request.auth.uid == userId;
-      allow update: if request.auth != null && request.auth.uid == userId;
-    }
-    
-    // Users collection
-    match /users/{userId} {
-      allow read: if request.auth != null;
-      allow create: if request.auth != null && request.auth.uid == userId;
-      allow update: if request.auth != null && request.auth.uid == userId;
-    }
-  }
-}
-```
-
-### 4. Настройка Storage правил
-
-В Firebase Console перейдите в Storage > Rules и установите:
-
-```javascript
-rules_version = '2';
-service firebase.storage {
-  match /b/{bucket}/o {
-    match /archives/{userId}/{allPaths=**} {
-      allow read: if true;
-      allow write: if request.auth != null && request.auth.uid == userId;
-    }
-  }
-}
-```
-
-### 5. Создание индексов Firestore
-
-В Firebase Console создайте следующие индексы:
-
-1. Collection: `archives`
-   - Fields: `tags` (Array), `где` (Descending)
-2. Collection: `archives`
-   - Fields: `userId` (Ascending), `uploadedAt` (Descending)
-
-## Запуск
+Запустите backend:
 
 ```bash
-# Режим разработки
+npm run start:dev
+```
+
+API по умолчанию доступно на `http://localhost:3010`.
+
+Установите и запустите frontend:
+
+```bash
+cd frontend
+npm install
 npm run dev
+```
 
-# Сборка для продакшена
+Frontend по умолчанию доступен на `http://localhost:5173`.
+
+## Сборка и проверки
+
+Backend:
+
+```bash
 npm run build
+npm test
+npm run test:e2e
+npm run smoke:curl
+```
 
-# Предпросмотр продакшен сборки
+Frontend:
+
+```bash
+cd frontend
+npm run build
 npm run preview
 ```
 
-## Деплой на GitHub Pages
+Swagger доступен после запуска backend:
 
-Проект настроен для деплоя на GitHub Pages в подпапке `/lab5/`.
-
-### Автоматический деплой (через GitHub Actions)
-
-1. Убедитесь, что файл `.github/workflows/deploy.yml` существует
-2. Запушьте изменения в ветку `main` или `master`
-3. GitHub Actions автоматически соберет и задеплоит проект
-4. В настройках репозитория (Settings → Pages) выберите:
-   - Source: `GitHub Actions`
-
-### Ручной деплой
-
-1. Соберите проект: `npm run build`
-2. Скопируйте содержимое папки `dist/` в корень репозитория или в папку `docs/`
-3. Запушьте изменения
-4. В настройках GitHub Pages укажите папку для деплоя
-
-**Важно:** Убедитесь, что в `vite.config.ts` указан правильный `base: '/lab5/'` для вашего пути на GitHub Pages.
-
-## Структура проекта
-
-```
-src/
-├── components/
-│   ├── auth/          # Компоненты аутентификации
-│   ├── upload/        # Загрузка архивов
-│   ├── archive/       # Список и карточки архивов
-│   └── layout/        # Навигация и layout
-├── services/          # Firebase сервисы
-├── context/           # React контексты
-├── hooks/             # Custom hooks
-└── types/             # TypeScript типы
+```text
+http://localhost:3010/api/docs
 ```
 
-## Использование
+GraphQL endpoint:
 
-1. Зарегистрируйтесь или войдите в систему
-2. Нажмите "Загрузить" для загрузки нового архива
-3. Заполните форму:
-   - Перетащите или выберите архив
-   - Введите ссылку на GitHub Pages
-   - Выберите теги проекта
-4. Используйте фильтры для поиска архивов по тегам и пользователям
+```text
+http://localhost:3010/graphql
+```
+
+Дополнительные сценарии проверки описаны в `md_files/RUN_AND_TEST.md`, `md_files/Lab5-GraphQL.md`, `md_files/Lab6-Manual.md` и `md_files/Lab7-Manual.md`.
+
+## Деплой frontend на GitHub Pages
+
+Текущий workflow `.github/workflows/deploy.yml` сохраняет прежний принцип деплоя для этого репозитория: GitHub Actions собирает только `lab5/frontend` и публикует статические файлы из `frontend/dist` в ветку `gh-pages`.
+
+Backend не деплоится на GitHub Pages. Его нужно запустить отдельно на Render, Railway, Fly.io, VPS или другом Node.js-хостинге с PostgreSQL. URL backend передаётся frontend через GitHub Secret `VITE_API_BASE_URL`.
+
+### GitHub Secrets
+
+В настройках репозитория добавьте secrets:
+
+```text
+VITE_API_BASE_URL
+VITE_FIREBASE_API_KEY
+VITE_FIREBASE_AUTH_DOMAIN
+VITE_FIREBASE_PROJECT_ID
+VITE_FIREBASE_APP_ID
+```
+
+Если сайт публикуется не в корень домена, задайте repository variable `VITE_BASE_PATH`, например `/lab5/`. По умолчанию используется `/`, что соответствует текущей схеме публикации workflow в корень `gh-pages`.
+
+### Настройка backend для production frontend
+
+На backend-хостинге задайте `FRONTEND_ORIGINS` со списком разрешённых origins:
+
+```env
+FRONTEND_ORIGINS="https://nkarbofos.github.io"
+```
+
+Для нескольких адресов используйте запятую:
+
+```env
+FRONTEND_ORIGINS="http://localhost:5173,https://nkarbofos.github.io"
+```
+
+### Ручная сборка frontend
+
+```bash
+cd lab5/frontend
+VITE_API_BASE_URL="https://your-api.example.com" npm run build
+```
+
+Содержимое `lab5/frontend/dist` можно опубликовать на любом статическом хостинге.
