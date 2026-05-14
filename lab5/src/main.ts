@@ -15,9 +15,16 @@ async function bootstrap() {
       .map((origin) => origin.trim())
       .filter(Boolean),
   ];
+  const isAllowedCorsOrigin = (origin?: string) => {
+    if (!origin) return true;
+    if (allowedOrigins.includes(origin)) return true;
+    return /^http:\/\/(localhost|127\.0\.0\.1):517\d$/.test(origin);
+  };
 
   app.enableCors({
-    origin: allowedOrigins,
+    origin: (origin, callback) => {
+      callback(null, isAllowedCorsOrigin(origin));
+    },
     allowedHeaders: ['Authorization', 'Content-Type', 'If-None-Match'],
     exposedHeaders: ['ETag', 'X-Elapsed-Time', 'Link'],
   });

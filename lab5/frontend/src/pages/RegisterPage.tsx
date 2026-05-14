@@ -62,30 +62,6 @@ export default function RegisterPage() {
             setError(null);
             try {
               const idToken = await register(email, password);
-              // #region agent log
-              fetch('http://127.0.0.1:7698/ingest/4b986e75-e98f-4cb5-907e-12224c08cdcd', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'X-Debug-Session-Id': '191d33',
-                },
-                body: JSON.stringify({
-                  sessionId: '191d33',
-                  runId: 'pre-fix',
-                  hypothesisId: 'H1-H2-H3',
-                  location: 'frontend/src/pages/RegisterPage.tsx:after-firebase-register',
-                  message: 'Firebase register returned token before DB profile POST',
-                  data: {
-                    hasIdToken: Boolean(idToken),
-                    tokenLength: idToken.length,
-                    firstNameLength: firstName.length,
-                    lastNameLength: lastName.length,
-                    hasTelegramUrl: Boolean(normalizedTelegramUrl),
-                  },
-                  timestamp: Date.now(),
-                }),
-              }).catch(() => {});
-              // #endregion
               const dbProfile = await authApi.registerProfile({
                 email,
                 firstName,
@@ -93,47 +69,8 @@ export default function RegisterPage() {
                 telegramUrl: normalizedTelegramUrl,
               }, { idToken });
               applyDbProfile(dbProfile);
-              // #region agent log
-              fetch('http://127.0.0.1:7698/ingest/4b986e75-e98f-4cb5-907e-12224c08cdcd', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'X-Debug-Session-Id': '191d33',
-                },
-                body: JSON.stringify({
-                  sessionId: '191d33',
-                  runId: 'pre-fix',
-                  hypothesisId: 'H1-H4',
-                  location: 'frontend/src/pages/RegisterPage.tsx:after-register-profile',
-                  message: 'DB profile registration completed on frontend',
-                  data: {
-                    hasDbProfileId: Boolean(dbProfile.id),
-                    role: dbProfile.role,
-                  },
-                  timestamp: Date.now(),
-                }),
-              }).catch(() => {});
-              // #endregion
               void nav('/');
             } catch (e) {
-              // #region agent log
-              fetch('http://127.0.0.1:7698/ingest/4b986e75-e98f-4cb5-907e-12224c08cdcd', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'X-Debug-Session-Id': '191d33',
-                },
-                body: JSON.stringify({
-                  sessionId: '191d33',
-                  runId: 'pre-fix',
-                  hypothesisId: 'H1-H4',
-                  location: 'frontend/src/pages/RegisterPage.tsx:register-catch',
-                  message: 'Registration flow failed on frontend',
-                  data: { error: e instanceof Error ? e.message : String(e) },
-                  timestamp: Date.now(),
-                }),
-              }).catch(() => {});
-              // #endregion
               setError(String(e));
             }
           })();

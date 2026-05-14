@@ -21,27 +21,6 @@ export class AuthApiController {
   @Get('me')
   async me(@Req() req: Request) {
     if (!req.user?.userId) {
-      // #region agent log
-      fetch('http://127.0.0.1:7698/ingest/4b986e75-e98f-4cb5-907e-12224c08cdcd', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Debug-Session-Id': '191d33',
-        },
-        body: JSON.stringify({
-          sessionId: '191d33',
-          runId: 'pre-fix',
-          hypothesisId: 'H3-H5',
-          location: 'src/auth/auth-api.controller.ts:me-missing-db-user',
-          message: 'GET /api/auth/me has token but no DB user id',
-          data: {
-            hasFirebaseUid: Boolean(req.user?.firebaseUid),
-            hasEmailInToken: Boolean(req.user?.email),
-          },
-          timestamp: Date.now(),
-        }),
-      }).catch(() => {});
-      // #endregion
       throw new BadRequestException('User is not registered in DB yet');
     }
     return this.usersService.findOne(req.user.userId);
@@ -50,33 +29,6 @@ export class AuthApiController {
   @ApiResponse({ status: 201 })
   @Post('register')
   async register(@Req() req: Request, @Body() dto: RegisterProfileDto) {
-    // #region agent log
-    fetch('http://127.0.0.1:7698/ingest/4b986e75-e98f-4cb5-907e-12224c08cdcd', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Debug-Session-Id': '191d33',
-      },
-      body: JSON.stringify({
-        sessionId: '191d33',
-        runId: 'pre-fix',
-        hypothesisId: 'H2-H4',
-        location: 'src/auth/auth-api.controller.ts:register-entry',
-        message: 'POST /api/auth/register entered controller',
-        data: {
-          hasFirebaseUid: Boolean(req.user?.firebaseUid),
-          hasExistingUserId: Boolean(req.user?.userId),
-          hasEmailInToken: Boolean(req.user?.email),
-          hasEmailInDto: Boolean(dto.email),
-          emailMatchesToken: req.user?.email ? req.user.email === dto.email : null,
-          firstNameLength: dto.firstName.length,
-          lastNameLength: dto.lastName.length,
-          hasTelegramUrl: Boolean(dto.telegramUrl),
-        },
-        timestamp: Date.now(),
-      }),
-    }).catch(() => {});
-    // #endregion
     if (!req.user?.firebaseUid)
       throw new BadRequestException('Missing firebase uid');
 
@@ -93,28 +45,6 @@ export class AuthApiController {
       lastName: dto.lastName,
       telegramUrl: dto.telegramUrl,
     });
-    // #region agent log
-    fetch('http://127.0.0.1:7698/ingest/4b986e75-e98f-4cb5-907e-12224c08cdcd', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Debug-Session-Id': '191d33',
-      },
-      body: JSON.stringify({
-        sessionId: '191d33',
-        runId: 'pre-fix',
-        hypothesisId: 'H4-H5',
-        location: 'src/auth/auth-api.controller.ts:register-upsert-result',
-        message: 'POST /api/auth/register upsert completed',
-        data: {
-          hasDbProfileId: Boolean(user.id),
-          hasFirebaseUid: Boolean(user.firebaseUid),
-          role: user.role,
-        },
-        timestamp: Date.now(),
-      }),
-    }).catch(() => {});
-    // #endregion
     return user;
   }
 }
